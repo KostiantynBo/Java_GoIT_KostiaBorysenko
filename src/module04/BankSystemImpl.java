@@ -1,4 +1,4 @@
-package module04.Task041;
+package module04;
 
 public class BankSystemImpl implements BankSystem {
 }
