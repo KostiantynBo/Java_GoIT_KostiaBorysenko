@@ -71,18 +71,31 @@ public class User {
     }
 
     double withdraw(int summ){
+        double balanceAfter;
         if (summ < 1000) {
-            return balance - summ*1.05;
+
+            balanceAfter = balance - summ*1.05;
+            return balanceAfter;
         } else
-        return balance - summ*1.1;
+            balanceAfter = balance - summ*1.1;
+        return balanceAfter;
     }
 
-    int companyNameLength (String name){
-        return name.length();
+    int companyNameLength (String companyName){
+
+        return companyName.length();
     }
 
     int monthIncreaser(int addMonth){
         return monthsOfEmployment += addMonth;
+    }
+
+    public static void main(String[] args) {
+
+        User user = new User("Loni", 900, 1, "Gulver", 300, null);
+
+        System.out.println(user.companyNameLength(user.getCompanyName()));
+
     }
 
 }
