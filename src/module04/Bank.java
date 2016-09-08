@@ -2,15 +2,15 @@ package module04;
 
 abstract class Bank {
 
-    long id;
-    String bankCountry;
-    Currency currency;
-    int numberOfEmployees;
-    double avrSalaryOfEmployee;
-    long rating;
-    long totalCapital;
+    private long id;
+    private String bankCountry;
+    private Currency currency;
+    private int numberOfEmployees;
+    private double avrSalaryOfEmployee;
+    private long rating;
+    private long totalCapital;
 
-    public Bank(long id, String bankCountry, Currency currency, int numberOfEmployees, double avrSalaryOfEmployee, long rating, long totalCapital) {
+    Bank(long id, String bankCountry, Currency currency, int numberOfEmployees, double avrSalaryOfEmployee, long rating, long totalCapital) {
         this.id = id;
         this.bankCountry = bankCountry;
         this.currency = currency;
@@ -75,12 +75,24 @@ abstract class Bank {
     public void setTotalCapital(long totalCapital) {
         this.totalCapital = totalCapital;
     }
-    abstract int getLimitOfWithdrawal();
-    abstract int getLimitOfFunding();
-    abstract int getMonthlyRate();
-    abstract int getCommission();
+    abstract double getLimitOfWithdrawal();
+    abstract double getLimitOfFunding();
+    abstract double getMonthlyRate();
+    abstract double getCommission(int amount);
     double moneyPaidMonthlyForSalary() {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "id=" + id +
+                ", bankCountry='" + bankCountry + '\'' +
+                ", currency=" + currency +
+                ", numberOfEmployees=" + numberOfEmployees +
+                ", avrSalaryOfEmployee=" + avrSalaryOfEmployee +
+                ", rating=" + rating +
+                ", totalCapital=" + totalCapital +
+                '}';
+    }
 }
