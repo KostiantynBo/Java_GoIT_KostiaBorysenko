@@ -81,9 +81,9 @@ public class User {
         return balanceAfter;
     }
 
-    int companyNameLength (String companyName){
+    int companyNameLength (){
 
-        return companyName.length();
+        return getCompanyName().length();
     }
 
     int monthIncreaser(int addMonth){
@@ -94,7 +94,7 @@ public class User {
 
         User user = new User("Loni", 900, 1, "Gulver", 300, null);
 
-        System.out.println(user.companyNameLength(user.getCompanyName()));
+        System.out.println(user.companyNameLength());
 
     }
 
