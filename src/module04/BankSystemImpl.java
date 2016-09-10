@@ -37,20 +37,13 @@ public class BankSystemImpl implements BankSystem {
 
         double withdrawal = amount + amount * userBank1.getCommission(amount);
 
-        if (userBank1.getLimitOfWithdrawal() >= withdrawal) {
-            double newBalance = fromUser.getBalance() - withdrawal;
-            fromUser.setBalance(newBalance);
-        } else {
-            System.out.println("Transfer limit was exceeded");
+        if (userBank1.getLimitOfWithdrawal() >= withdrawal && userBank2.getLimitOfFunding() >= amount) {
+                fromUser.setBalance(fromUser.getBalance() - withdrawal);
+                toUser.setBalance(toUser.getBalance() + amount);
+            } else {
+                System.out.println("Transfer limit was exceeded");
+            }
         }
-
-        if (userBank2.getLimitOfFunding() >= amount) {
-            double newBalance = toUser.getBalance() + amount;
-            toUser.setBalance(newBalance);
-        } else {
-            System.out.println("Transfer limit was exceeded");
-        }
-    }
 
     @Override
     public void paySalary(User user) {
