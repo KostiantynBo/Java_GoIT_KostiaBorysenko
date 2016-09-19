@@ -4,7 +4,7 @@ public class DAOImpl implements DAO{
     @Override
     public Room save(Room room) {
         System.out.println(room + " saved to DB.");
-        return null;
+        return room;
     }
 
     @Override
@@ -16,7 +16,7 @@ public class DAOImpl implements DAO{
     @Override
     public Room update(Room room) {
         System.out.println(room + " update DB.");
-        return null;
+        return room;
     }
 
     @Override
