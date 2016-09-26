@@ -3,6 +3,9 @@ package module05;
 public class Main {
     public static void main(String[] args) {
 
+        Room orderRoom = new Room(8591,1,"Fairmont Grand Hotel", "Kiev" );
+
+
         Controller controller = new Controller();
 
         controller.requestRooms(100, 2, "Krakow", "HolidayInn");

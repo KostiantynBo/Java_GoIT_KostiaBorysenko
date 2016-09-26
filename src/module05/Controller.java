@@ -16,4 +16,9 @@ public class Controller implements API {
     public Room[] findRooms(Room room) {
         return new Room[0];
     }
+
+    @Override
+    public int counterRooms(Room room) {
+        return 0;
+    }
 }
