@@ -1,9 +1,7 @@
 package module05;
 
-
 public interface API {
 
-    Room[] findRooms(Room room);
+    Room[] findRooms(int price, int persons, String city, String hotel);
 
-    int counterRooms (Room room);
 }
