@@ -11,14 +11,23 @@ public class Room {
     private String hotelName;
     private String cityName;
 
-    public Room(long id, int price, int persons, Date dateAvailableFrom, String hotelName, String cityName) {
+    public Room(long id, int price, int persons, String hotelName, String cityName) {
         this.id = id;
         this.price = price;
         this.persons = persons;
-        this.dateAvailableFrom = dateAvailableFrom;
+        this.dateAvailableFrom = new Date();
         this.hotelName = hotelName;
         this.cityName = cityName;
     }
+
+    public Room(int price, int persons, String hotelName, String cityName) {
+        this.price = price;
+        this.persons = persons;
+        this.hotelName = hotelName;
+        this.cityName = cityName;
+    }
+
+
 
     public long getId() {
         return id;
@@ -78,10 +87,9 @@ public class Room {
         if (id != room.id) return false;
         if (price != room.price) return false;
         if (persons != room.persons) return false;
-        if (dateAvailableFrom != null ? !dateAvailableFrom.equals(room.dateAvailableFrom) : room.dateAvailableFrom != null)
-            return false;
-        if (hotelName != null ? !hotelName.equals(room.hotelName) : room.hotelName != null) return false;
-        return cityName != null ? cityName.equals(room.cityName) : room.cityName == null;
+        if (!dateAvailableFrom.equals(room.dateAvailableFrom)) return false;
+        if (!hotelName.equals(room.hotelName)) return false;
+        return cityName.equals(room.cityName);
 
     }
 
@@ -90,9 +98,9 @@ public class Room {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + price;
         result = 31 * result + persons;
-        result = 31 * result + (dateAvailableFrom != null ? dateAvailableFrom.hashCode() : 0);
-        result = 31 * result + (hotelName != null ? hotelName.hashCode() : 0);
-        result = 31 * result + (cityName != null ? cityName.hashCode() : 0);
+        result = 31 * result + dateAvailableFrom.hashCode();
+        result = 31 * result + hotelName.hashCode();
+        result = 31 * result + cityName.hashCode();
         return result;
     }
 

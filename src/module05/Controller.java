@@ -4,7 +4,7 @@ public class Controller implements API {
 
     private API apis[] = new API[3];
 
-    public Room[] requstRooms(int price, int persons, String city, String hotel) {
+    public Room[] requestRooms(int price, int persons, String city, String hotel) {
         return null;
     }
 
@@ -13,7 +13,7 @@ public class Controller implements API {
     }
 
     @Override
-    public Room[] findRooms(int price, int persons, String city, String hotel) {
+    public Room[] findRooms(Room room) {
         return new Room[0];
     }
 }
