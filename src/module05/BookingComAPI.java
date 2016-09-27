@@ -36,4 +36,9 @@ public class BookingComAPI implements API {
         //System.arraycopy(findRooms,0,findRoomsCut,0,findRoomsCut.length);
         return findRoomsCut;
     }
+
+    @Override
+    public Room[] getAllRooms() {
+        return rooms;
+    }
 }
