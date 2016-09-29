@@ -1,16 +1,19 @@
 package module02;
 
+import module06.ArraysUtils;
+
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class Task021 {
 
-    public double sumArr(int[] arr) {
+    /* public double sumArr(int[] arr) {
         int sum = IntStream.of(arr).sum();
         return sum;
-        /*int sum = 0;
-        for( int i : numbers) {
-        sum += i;
-        } и по старинке*/
+        //int sum = 0;
+        //for( int i : numbers) {
+        //sum += i;
+        //} и по старинке
 
     }
 
@@ -86,7 +89,7 @@ public class Task021 {
         }
 
         return secondLargest;
-    }
+    } */
 
 
     public static void main(String args[]) {
@@ -95,20 +98,37 @@ public class Task021 {
 
         int[] arr1 = new int[]{300, -2, 18, 27, 54, 9, 12, -470, 90, 45};
 
-        System.out.println("The sum is: " + arrays.sumArr(arr1));
+        //System.out.println("The sum is: " + arrays.sumArr(arr1));
 
-        System.out.println("Maximum is: " + arrays.maxArr(arr1));
+        //System.out.println("Maximum is: " + arrays.maxArr(arr1));
 
-        System.out.println("Minimum is: " + arrays.minArr(arr1));
+        //System.out.println("Minimum is: " + arrays.minArr(arr1));
 
-        System.out.println("Maximum positive is: " + arrays.maxPositive(arr1));
+        //System.out.println("Maximum positive is: " + arrays.maxPositive(arr1));
 
-        System.out.println("Multiplication is: " + arrays.multiplication(arr1));
+        //System.out.println("Multiplication is: " + arrays.multiplication(arr1));
 
-        System.out.println("The modulus of first and last element is: " + arrays.modulus(arr1));
+        //System.out.println("The modulus of first and last element is: " + arrays.modulus(arr1));
 
-        System.out.println("The second largest element is: " + arrays.secondLargest(arr1));
+        //System.out.println("The second largest element is: " + arrays.secondLargest(arr1));
 
+        System.out.println("The sum is: " + ArraysUtils.sumArr(arr1));
+
+        System.out.println("Maximum is: " + ArraysUtils.maxArr(arr1));
+
+        System.out.println("Minimum is: " + ArraysUtils.minArr(arr1));
+
+        System.out.println("Maximum positive is: " + ArraysUtils.maxPositive(arr1));
+
+        System.out.println("Multiplication is: " + ArraysUtils.multiplication(arr1));
+
+        System.out.println("The modulus of first and last element is: " + ArraysUtils.modulus(arr1));
+
+        System.out.println("The second largest element is: " + ArraysUtils.secondLargest(arr1));
+
+        System.out.println("The revers array: " + Arrays.toString(ArraysUtils.reverse(arr1)));
+
+        System.out.println("The even elements of array is: " + Arrays.toString(ArraysUtils.findEvenElements(arr1)));
 
     }
 }
