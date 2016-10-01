@@ -17,14 +17,14 @@ public class Main {
 
         Controller controller = new Controller();
 
-        controller.requestRooms(10000, 2, "Fairmont Grand Hotel", "Kiev");
-        controller.requestRooms(3400, 2, "Podol Plaza Hotel", "Kyiv");
-        controller.requestRooms(2500, 2, "IBIS Киев Центр", "Kiev");
+        System.out.println(Arrays.toString(controller.requestRooms(10000, 2, "Fairmont Grand Hotel", "Kiev")));
+        System.out.println(Arrays.toString(controller.requestRooms(3400, 2, "Podol Plaza Hotel", "Kyiv")));
+        System.out.println(Arrays.toString(controller.requestRooms(2500, 2, "IBIS Киев Центр", "Kiev")));
 
 
-        controller.check(new BookingComAPI(), new GoogleAPI());
-        controller.check(new BookingComAPI(), new TripAdvisorAPI());
-        controller.check(new TripAdvisorAPI(), new GoogleAPI());
+        System.out.println(Arrays.toString(controller.check(new BookingComAPI(), new GoogleAPI())));
+        System.out.println(Arrays.toString(controller.check(new BookingComAPI(), new TripAdvisorAPI())));
+        System.out.println(Arrays.toString(controller.check(new TripAdvisorAPI(), new GoogleAPI())));
 
     }
 }
