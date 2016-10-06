@@ -32,7 +32,7 @@ public class Controller {
 
     public Room[] check(API api1, API api2) {
 
-        Room[] res1 = api1.getAllRooms();
+       /* Room[] res1 = api1.getAllRooms();
         Room[] res2 = api2.getAllRooms();
 
         int countRooms = 0;
@@ -56,6 +56,33 @@ public class Controller {
             }
         }
         return checkRoom;
-    }
+    } */
+        Room[] res1 = api1.getAllRooms();
+        Room[] res2 = api2.getAllRooms();
+        int lengthTempCheckRooms;
+        if(res1.length>res2.length){
+            lengthTempCheckRooms = res2.length;
+        } else {
+            lengthTempCheckRooms = res1.length;
+        }
 
+        Room[] tempCheckRooms = new Room[lengthTempCheckRooms];
+        int k=0;
+        int countRooms = 0;
+        for (int i = 0; i < res1.length; i++) {
+            for (int j = 0; j < res2.length; j++) {
+                if (res1[i].equals(res2[j])) {
+                    tempCheckRooms[k] = res1[i];
+                    countRooms++;
+                    k++;
+                }
+            }
+        }
+
+        Room[] checkRoom = new Room[countRooms];
+        System.arraycopy(tempCheckRooms,0,checkRoom,0,checkRoom.length);
+
+
+        return checkRoom;
+    }
 }
