@@ -96,7 +96,7 @@ public final class ArraysUtils {
         return reversedArray;
     }
     public static int[] findEvenElements(int[] array) {
-        int countEvens = 0;
+       /* int countEvens = 0;
         for (int i = 0; i < array.length; i++) {
             if (i % 2 == 0) {
                 countEvens++;
@@ -110,6 +110,20 @@ public final class ArraysUtils {
                 count++;
             }
         }
+        return evenElements;*/
+        int [] tempEvenElements = new int[array.length];
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 == 0) {
+                tempEvenElements[count] = array[i];
+                count++;
+            }
+        }
+
+        int[] evenElements = new int[count+1];
+        System.arraycopy(tempEvenElements,0,evenElements,0,evenElements.length);
+
+
         return evenElements;
     }
 }
