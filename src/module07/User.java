@@ -8,8 +8,6 @@ public class User {
     private String lastName;
     private String city;
     private int balance;
-<<<<<<< Updated upstream
-=======
 
     public User(long id, String firstName, String lastName, String city, int balance) {
         this.id = id;
@@ -94,5 +92,5 @@ public class User {
     public void setBalance(int balance) {
         this.balance = balance;
     }
->>>>>>> Stashed changes
+
 }

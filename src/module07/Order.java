@@ -1,9 +1,5 @@
 package module07;
 
-<<<<<<< Updated upstream
-import java.util.Currency;
-=======
->>>>>>> Stashed changes
 
 public class Order {
     private long id;
@@ -13,8 +9,7 @@ public class Order {
     private String shopIdentificator;
     private User user;
 
-<<<<<<< Updated upstream
-=======
+
     public Order(long id, int price, Currency currency, String itemName, String shopIdentificator, User user) {
         this.id = id;
         this.price = price;
@@ -23,6 +18,7 @@ public class Order {
         this.shopIdentificator = shopIdentificator;
         this.user = user;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -110,5 +106,5 @@ public class Order {
     public void setUser(User user) {
         this.user = user;
     }
->>>>>>> Stashed changes
+
 }
