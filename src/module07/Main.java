@@ -154,6 +154,19 @@ public class Main {
 
         // separate list for as many lists as many unique cities are in User
 
+        Map<String, List<Order>> result = new HashMap<>();
+        for (Order order : listOfOrder) {
+            User user = order.getUser();
+            String city = user.getCity();
+            if (result.containsKey(city)) {
+                result.get(city).add(order);
+            } else {
+                List<Order> resultOrders = new ArrayList<>();
+                resultOrders.add(order);
+                result.put(city, resultOrders);
+            }
+        }
+
     }
 
 }
