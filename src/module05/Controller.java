@@ -102,6 +102,7 @@ public class Controller {
 */
         Set <Room> checkRoom = new TreeSet<>();
         checkRoom.addAll(api1);
+        checkRoom.addAll(api2);
         return checkRoom;
     }
 }
