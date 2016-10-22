@@ -48,9 +48,10 @@ public class Main2 {
 
         // check if set contain Order where User’s lastName is - “Petrov”
 
-        Iterator<Order> iterator2 = listOfOrder.iterator();
-        while (iterator2.hasNext()) {
-            Order order = iterator2.next();
+        Iterator<Order> iterator;
+        iterator = listOfOrder.iterator();
+        while (iterator.hasNext()) {
+            Order order = iterator.next();
             if (order.getUser().getLastName().equals("Petrov")) {
                 System.out.println("Set contain Order where User’s lastName is - “Petrov”.");
             }

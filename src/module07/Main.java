@@ -49,12 +49,7 @@ public class Main {
 
         //sort list by Order price in decrease order
 
-        Comparator<Order> comparatorPrice = new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                return o2.getPrice() - o1.getPrice();
-            }
-        };
+        Comparator<Order> comparatorPrice = (o1, o2) -> o2.getPrice() - o1.getPrice();
 
         listOfOrder.sort(comparatorPrice);
         System.out.println("Sort by price: ");
@@ -62,15 +57,12 @@ public class Main {
 
         //sort list by Order price in increase order AND User city
 
-        Comparator<Order> comparatorPriceAndCity = new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                int res = o1.getPrice() - o2.getPrice();
-                if (res == 0) {
-                    return o1.getUser().getCity().compareTo(o2.getUser().getCity());
-                }
-                return res;
+        Comparator<Order> comparatorPriceAndCity = (o1, o2) -> {
+            int res = o1.getPrice() - o2.getPrice();
+            if (res == 0) {
+                return o1.getUser().getCity().compareTo(o2.getUser().getCity());
             }
+            return res;
         };
 
         listOfOrder.sort(comparatorPriceAndCity);
@@ -79,19 +71,16 @@ public class Main {
 
         //sort list by Order itemName AND ShopIdentificator AND User city
 
-        Comparator<Order> comparatorItemNameAndShopIdentificatorAndCity = new Comparator<Order>() {
-            @Override
-            public int compare(Order o1, Order o2) {
-                int res1 = o1.getItemName().compareTo(o2.getItemName());
-                if (res1 == 0) {
-                    int res2 = o1.getShopIdentificator().compareTo(o2.getShopIdentificator());
-                    if (res2 == 0) {
-                        return o1.getUser().getCity().compareTo(o2.getUser().getCity());
-                    }
-                    return res2;
+        Comparator<Order> comparatorItemNameAndShopIdentificatorAndCity = (o1, o2) -> {
+            int res1 = o1.getItemName().compareTo(o2.getItemName());
+            if (res1 == 0) {
+                int res2 = o1.getShopIdentificator().compareTo(o2.getShopIdentificator());
+                if (res2 == 0) {
+                    return o2.getUser().getCity().compareTo(o1.getUser().getCity());
                 }
-                return res1;
+                return res2;
             }
+            return res1;
         };
         listOfOrder.sort(comparatorItemNameAndShopIdentificatorAndCity);
         System.out.println("Sort by itemName, shopIdentificator and city: ");
@@ -99,30 +88,15 @@ public class Main {
 
         // delete duplicates from the list
 
-        //Stream version
-
         listOfOrder = listOfOrder.stream().distinct().collect(Collectors.toList());
 
         System.out.println("ListOfOrder without dublicates: ");
         System.out.println(listOfOrder);
 
-        // Копирование всех элементов ArrayList к LinkedHashSet. LinkedHashSet  - удаляет дубликаты и поддерживает порядок вставки.
-
-        /*
-        LinkedHashSet<Order> listOfOrderTemp = new LinkedHashSet<Order>();
-
-        listOfOrderTemp.addAll(listOfOrder);
-
-        listOfOrder.clear();
-
-        listOfOrder.addAll(listOfOrderTemp);
-
-        System.out.println("ListOfOrder without dublicates: " + listOfOrder);
-        */
-
         //delete items where price less than 1500
 
-        Iterator<Order> iterator = listOfOrder.iterator();
+        Iterator<Order> iterator;
+        iterator = listOfOrder.iterator();
         while (iterator.hasNext()) {
             Order order = iterator.next();
             if (order.getPrice() < 1500) {
