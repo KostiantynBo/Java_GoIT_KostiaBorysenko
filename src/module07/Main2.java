@@ -1,8 +1,10 @@
 package module07;
 
-import java.util.Iterator;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import static module07.Currency.UAH;
 import static module07.Currency.USD;
@@ -11,7 +13,7 @@ public class Main2 {
     public static void main(String[] args) {
         // Create Main class where you create 10 Orders with 10 Users and put it to the TreeSet.
         // You should create 8 unique and two duplicated Orders
-        User user1 = new User(1, "firstName1", "lastName1", "Kiev", 100);
+        User user1 = new User(1, "firstName1", "Petrov", "Kiev", 100);
         User user2 = new User(2, "firstName2", "lastName2", "Kiev", 200);
         User user3 = new User(3, "firstName3", "lastName3", "Kiev", 300);
         User user4 = new User(4, "firstName4", "lastName4", "Kiev", 400);
@@ -33,7 +35,7 @@ public class Main2 {
         Order order9 = new Order(1010, 2000, UAH, "item10", "Shop10", user10);
         Order order10 = new Order(1010, 2000, UAH, "item10", "Shop10", user10);
 
-        Set<Order> listOfOrder = new TreeSet<>();
+        Set<Order> listOfOrder = new HashSet<>();
 
         listOfOrder.add(order1);
         listOfOrder.add(order2);
@@ -46,45 +48,22 @@ public class Main2 {
         listOfOrder.add(order9);
         listOfOrder.add(order10);
 
-        // check if set contain Order where User’s lastName is - “Petrov”
+        System.out.println("\nCheck if set contain Order where User’s lastName is - “Petrov”:");
+        boolean isContain = listOfOrder.stream()
+                .anyMatch(o -> (o.getUser().getLastName()).equals("Petrov"));
+        System.out.println(isContain);
 
-        Iterator<Order> iterator;
-        iterator = listOfOrder.iterator();
-        while (iterator.hasNext()) {
-            Order order = iterator.next();
-            if (order.getUser().getLastName().equals("Petrov")) {
-                System.out.println("Set contain Order where User’s lastName is - “Petrov”.");
-            }
-        }
+        System.out.println("\nPrint Order with largest price using only one set method - get:");
+        Order theMostExpensiveOrder = listOfOrder.stream()
+                .max((o1, o2) -> Integer.compare(o1.getPrice(), o2.getPrice())).get();
+        System.out.println(theMostExpensiveOrder);
 
-        // print Order with largest price using only one set method - get
-
-        Set<Order> listTemp = new TreeSet<>();
-        listTemp.addAll(listOfOrder);
-        int i = 0;
-        for (Order ord : listOfOrder) {
-            if (ord.getPrice() > i) i = ord.getPrice();
-        }
-        Iterator<Order> iterator3 = listTemp.iterator();
-        while (iterator3.hasNext()) {
-            if (iterator3.next().getPrice() < i) {
-                iterator3.remove();
-            }
-        }
-        System.out.println(listTemp);
-
-        // delete orders where currency is USD using Iterator
-
-        Iterator<Order> iterator4 = listOfOrder.iterator();
-        while (iterator4.hasNext()) {
-            Order order = iterator4.next();
-            if (order.getCurrency() == USD) {
-                iterator4.remove();
-            }
-        }
-
-        System.out.println("Only orders where currency is UAH: ");
-        System.out.println(listOfOrder);
-
+        System.out.println("\nDelete orders where currency is USD:");
+        Currency currency = Currency.USD;
+        List<Order> ordersWithoutUsdCurrency = listOfOrder.stream()
+                .filter(o -> !o.getCurrency().equals(currency))
+                .collect(Collectors.toList());
+        System.out.println(ordersWithoutUsdCurrency);
     }
 }
+

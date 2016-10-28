@@ -1,6 +1,8 @@
 package module07;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static module07.Currency.UAH;
@@ -49,7 +51,7 @@ public class Main {
 
         //sort list by Order price in decrease order
 
-        Comparator<Order> comparatorPrice = (o1, o2) -> o2.getPrice() - o1.getPrice();
+        Comparator<Order> comparatorPrice = (o1, o2) -> Integer.compare(o2.getPrice(), o1.getPrice());
 
         listOfOrder.sort(comparatorPrice);
         System.out.println("Sort by price: ");
@@ -58,11 +60,12 @@ public class Main {
         //sort list by Order price in increase order AND User city
 
         Comparator<Order> comparatorPriceAndCity = (o1, o2) -> {
-            int res = o1.getPrice() - o2.getPrice();
-            if (res == 0) {
-                return o1.getUser().getCity().compareTo(o2.getUser().getCity());
+            int res = Integer.compare(o1.getPrice(), o2.getPrice());
+            if (res != 0) {
+                return res;
             }
-            return res;
+            return o1.getUser().getCity().compareTo(o2.getUser().getCity());
+
         };
 
         listOfOrder.sort(comparatorPriceAndCity);
@@ -72,15 +75,16 @@ public class Main {
         //sort list by Order itemName AND ShopIdentificator AND User city
 
         Comparator<Order> comparatorItemNameAndShopIdentificatorAndCity = (o1, o2) -> {
-            int res1 = o1.getItemName().compareTo(o2.getItemName());
-            if (res1 == 0) {
-                int res2 = o1.getShopIdentificator().compareTo(o2.getShopIdentificator());
-                if (res2 == 0) {
-                    return o2.getUser().getCity().compareTo(o1.getUser().getCity());
-                }
-                return res2;
+            int result = o1.getItemName().compareTo(o2.getItemName());
+            if (result != 0) {
+                return result;
             }
-            return res1;
+            result = o1.getShopIdentificator().compareTo(o2.getShopIdentificator());
+            if (result != 0) {
+                return result;
+            }
+            return o2.getUser().getCity().compareTo(o1.getUser().getCity());
+
         };
         listOfOrder.sort(comparatorItemNameAndShopIdentificatorAndCity);
         System.out.println("Sort by itemName, shopIdentificator and city: ");
@@ -95,52 +99,25 @@ public class Main {
 
         //delete items where price less than 1500
 
-        Iterator<Order> iterator;
-        iterator = listOfOrder.iterator();
-        while (iterator.hasNext()) {
-            Order order = iterator.next();
-            if (order.getPrice() < 1500) {
-                iterator.remove();
-            }
-        }
+        Predicate<Order> predicate = i -> i.getPrice() < 1500;
+        List<Order> list = listOfOrder.stream().filter(predicate).collect(Collectors.toList());
 
         System.out.println("Price more than 1500: ");
-        System.out.println(listOfOrder);
+        System.out.println(list);
 
         // separate list for two list - orders in USD and UAH
 
-        List<Order> ordersInUSD = new ArrayList<>();
-        List<Order> ordersInUAH = new ArrayList<>();
-
-        Iterator<Order> iterator1 = listOfOrder.iterator();
-        while (iterator1.hasNext()) {
-            Order order = iterator1.next();
-            if (order.getCurrency() == UAH) {
-                ordersInUAH.add(order);
-            } else {
-                ordersInUSD.add(order);
-            }
-        }
-        System.out.println("Orders in UAH: ");
-        System.out.println(ordersInUAH);
-        System.out.println("Orders in USD: ");
-        System.out.println(ordersInUSD);
+        separateList(listOfOrder, Order::getCurrency);
 
         // separate list for as many lists as many unique cities are in User
 
-        Map<String, List<Order>> result = new HashMap<>();
-        for (Order order : listOfOrder) {
-            User user = order.getUser();
-            String city = user.getCity();
-            if (result.containsKey(city)) {
-                result.get(city).add(order);
-            } else {
-                List<Order> resultOrders = new ArrayList<>();
-                resultOrders.add(order);
-                result.put(city, resultOrders);
-            }
-        }
+        separateList(listOfOrder, i -> i.getUser().getCity());
 
     }
+
+    private static <T> Map<T, List<Order>> separateList(List<Order> orders, Function<Order, T> function) {
+        return orders.stream().collect(Collectors.groupingBy(function));
+    }
+
 
 }
