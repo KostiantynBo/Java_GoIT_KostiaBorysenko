@@ -5,11 +5,12 @@ import java.util.List;
 
 public class Main103 {
     public static void main(String[] args) {
+        List<Object> list = new ArrayList<>();
+        list = null;
         try {
-            List<Object> list = new ArrayList<>();
-            list.get(0);
+            int i =list.size();
         } catch (Throwable t) {
-            System.out.println("this element does not exist");
+            System.out.println(t.toString());
         }
     }
 }

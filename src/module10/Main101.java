@@ -13,6 +13,8 @@ public class Main101 {
         } catch (Exception e) {
 
             System.out.println("The String is null!");
+        } finally {
+            System.out.println("Finished!");
         }
 
     }

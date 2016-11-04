@@ -1,7 +1,14 @@
 package module10;
 
 public class TestExeption extends Exception {
-    public TestExeption(String message) {
-        super(message);
+
+    private String test;
+
+    public TestExeption(String test) {
+        this.test = test;
+    }
+
+    public String getTest() {
+        return test;
     }
 }

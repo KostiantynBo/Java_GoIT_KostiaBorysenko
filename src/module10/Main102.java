@@ -6,7 +6,7 @@ public class Main102 {
         try {
             checkString("test");
         } catch (TestExeption e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getTest());
         }
     }
 

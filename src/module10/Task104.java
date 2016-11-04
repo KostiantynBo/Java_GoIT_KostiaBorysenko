@@ -2,15 +2,18 @@ package module10;
 
 public class Task104 {
 
-    public void f() throws TestExeption {
+    public static void f(){
         try {
             g();
-        } catch (Exception e) {
-
-            throw new TestExeption("Hi");
+        } catch (TestExeption e) {
+            System.out.println(e);
+            throw new RuntimeException("Inside the catch");
         }
     }
 
-    private void g() throws TestExeption{
+    private static void g() throws TestExeption {
+        throw new TestExeption("TestException");
     }
+
 }
+
